@@ -1,0 +1,24 @@
+<% provide(:title, "Post") %>
+<p id="notice"><%= notice %></p>
+<div class="container">
+<div class="card mb-4">
+<% if false %><%= image_tag ('gotham.jpg'),  class:"card-img-top", alt:"Gotham city" %><% end %>
+          <div class="card-body">
+            <h2 class="card-title"><%= @post.title %></h2>
+            <p class="card-text"><%= @post.body %></p>
+            <% @post.tag_list.each do |tag| %>
+              <p class="card-text"><%= link_to tag, tag_path(ActsAsTaggableOn::Tag.find_by_name(tag)) %></p>
+            <% end %>
+            <%= link_to 'Edit', edit_post_path(@post), class:"btn btn-success" %>
+          </div>
+          <div class="card-footer text-muted">
+            Posted on <%= @post.created_at %> By 
+            <a href="#"><%= @post.user.username %></a>
+          </div>
+</div>
+
+
+<%= render 'comments/display'%>
+
+<%= link_to 'Back', posts_path, class:"btn btn-success" %>
+</div>
